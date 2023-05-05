@@ -1,7 +1,7 @@
 const productos = [
     {
         id: "zapato-1",
-        titulo: "Zapato-1",
+        titulo: "Augustus",
         imagen: "../multimedia1/imagenes/zapatoshombre/zapato.jpg",
         categoria: {
             nombre: "Mens shoes",
@@ -12,7 +12,7 @@ const productos = [
     },
     {
         id: "zapato-2",
-        titulo: "Zapato-2",
+        titulo: "Basil",
         imagen: "../multimedia1/imagenes/zapatoshombre/zapatomarrones.jpg",
         categoria: {
             nombre: "Mens shoes",
@@ -22,7 +22,7 @@ const productos = [
     },
     {
         id: "zapato-3",
-        titulo: "Zapato-3",
+        titulo: "Bernard",
         imagen: "../multimedia1/imagenes/zapatoshombre/zapatonegro.jpg",
         categoria: {
             nombre: "Mens shoes",
@@ -32,7 +32,7 @@ const productos = [
     },
     {
         id: "zapato-4",
-        titulo: "Zapato-4",
+        titulo: "Charles",
         imagen: "../multimedia1/imagenes/zapatoshombre/botamarron.jpg",
         categoria: {
             nombre: "Mens shoes",
@@ -42,7 +42,7 @@ const productos = [
     },
     {
         id: "zapato-5",
-        titulo: "Zapato-5",
+        titulo: "Caesar",
         imagen: "../multimedia1/imagenes/zapatoshombre/botabase.jpg",
         categoria: {
             nombre: "Mens shoes",
@@ -52,18 +52,22 @@ const productos = [
     },
     {
         id: "zapato-6",
-        titulo: "Zapato-6",
+        titulo: "Darius",
         imagen: "../multimedia1/imagenes/zapatoshombre/botanegra.jpg",
         categoria: {
             nombre: "Mens shoes",
             id: "zapato"
         },
         precio: 35000
-    }
-];
-const contenedorProductos = document.querySelector("#contenedor-productos");
+    },
 
-function cargarProductos() {
+];
+/*elementos del DOM*/
+const contenedorProductos = document.querySelector("#contenedor-productos");
+let comprar = document.querySelectorAll(".comprar");
+
+
+function cargarProductos(poductosElegidos) {
 
     productos.forEach(producto => {
 
@@ -73,12 +77,29 @@ function cargarProductos() {
         <img src="${producto.imagen}" alt="${producto.titulo}" class= "shoe-zap1">
       <p>${producto.titulo}</p>
       <p>${producto.precio}</p>
-      <button>Comprar</button> 
+      <button class="comprar" id="${producto.id}">Comprar</button> 
         `;
         contenedorProductos.append(div);
 
-    })
+    });
+    actualizarComprar();
+    
 
 }
 
-cargarProductos()
+cargarProductos(productos);
+
+
+function actualizarComprar() {
+    comprar = document.querySelectorAll(".comprar");
+
+    comprar.forEach(boton => {
+        boton.addEventListener("click", agregarABag);
+
+    });
+}
+const productosEnBag = [];
+function agregarABag(e) {
+    const id = e.currentTarget.id;
+    console.log(id);
+}
