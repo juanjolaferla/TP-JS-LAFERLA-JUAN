@@ -65,9 +65,11 @@ const productos = [
 /*elementos del DOM*/
 const contenedorProductos = document.querySelector("#contenedor-productos");
 let comprar = document.querySelectorAll(".comprar");
-const numero = document.querySelector("numero");
+const numero = document.querySelector("#numero");
 
 function cargarProductos(poductosElegidos) {
+
+contenedorProductos.innerHTML = "";
 
     productos.forEach(producto => {
 
@@ -102,26 +104,24 @@ const productosEnBag = [];
 
 function agregarABag(e) {
     const idCompra = e.currentTarget.id;
-    const productosAgregados  = productos.find(producto => producto.id === idCompra);
+    const productosAgregados = productos.find (producto => producto.id === idCompra);
 
-    if (productosEnBag.some(producto => producto.id === idCompra)) {
-        const index = productosEnBag.findIndex(producto =>producto.id === idCompra);
-        productosEnBag[index].cantidad++;
+    if(productosEnBag.some(producto => producto.id === idCompra)){
+    const index = productosEnBag.findIndex(producto => producto.id === idCompra);
+    productosEnBag[index].cantidad++;
 
     } else{
-        productosAgregados.cantidad = 1;
-        productosEnBag.push(productosAgregados);
+    productosAgregados.cantidad = 1;
+    productosEnBag.push(productosAgregados);
+    }
+    actualizarNumero();
+    localStorage.setItem("zapatos-en-bag", JSON.stringify(productosEnBag));
+    console.log(productosEnBag)
     }
 
-    actualizarNumero ();
-    
-    localStorage.setItem("zapatos-en-bag", JSON.stringify(productosEnBag));
+function actualizarNumero(){
+    let actualizarNumero = productosEnBag.reduce((acc, producto)=> acc + producto.cantidad,0);
+    numero.innerHTML = actualizarNumero;
+} 
 
-}
-
-function actualizarNumero () {
-    let numero = productosEnBag.reduce((acc, producto)=> acc + producto.cantidad, 0 );
-    numero.innerText = numero;
-    console.log(numero);
-    
-}
+   
