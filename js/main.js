@@ -100,7 +100,15 @@ function actualizarComprar() {
 
     });
 }
-const productosEnBag = [];
+let productosEnBag;
+let productosEnBagLS = localStorage.getItem("zapatos-en-bag");
+if(productosEnBagLS){
+productosEnBag = JSON.parse(productosEnBagLS);
+actualizarNumero()
+}else {
+    productosEnBag = [];
+};
+//const productosEnBag = [];
 
 function agregarABag(e) {
     const idCompra = e.currentTarget.id;
